@@ -1,0 +1,7 @@
+# rbac/data-service-sa.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: data-service-sa
+  namespace: app
+

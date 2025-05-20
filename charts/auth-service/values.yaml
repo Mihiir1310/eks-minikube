@@ -1,0 +1,44 @@
+replicaCount: 1
+
+image:
+  repository: kennethreitz/httpbin
+  tag: latest
+  pullPolicy: IfNotPresent
+
+service:
+  type: ClusterIP
+  port: 80
+
+resources:
+  requests:
+    memory: "64Mi"
+    cpu: "100m"
+  limits:
+    memory: "128Mi"
+    cpu: "200m"
+
+livenessProbe:
+  httpGet:
+    path: /status/200
+    port: 80
+readinessProbe:
+  httpGet:
+    path: /status/200
+    port: 80
+
+ingress:
+  enabled: false
+
+serviceAccount:
+  create: false
+  name: ""
+  automount: true
+  annotations: {}
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+    
